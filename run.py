@@ -10,6 +10,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("love_sandwiches")
 
+
 def get_sales_data():
     """
     Get sales figures input from the user.
@@ -38,6 +39,15 @@ def validate_data(values):
     Inside the try, converts all string values into integers.
     Raises ValueError if strings cannot be converted into int,
     or if there aren't exactly 6 values.
+
+    I don't like the raise error within the try block i think it should
+    all be handled in except blocks
+    ah i get it now why int(value) is not saved really coz this is
+    validate data functiona nd returns either true or faLSE
+    its not goign to be returning a tuple
+    so amybe forgiven.....
+    so if the raise error is invoked then it saves that literal to e whioch is
+    included in the next except
     """
     try:
         [int(value) for value in values]
@@ -50,8 +60,9 @@ def validate_data(values):
         return False
     return True
 
+
 def update_sales_worksheet(data):
-    """
+    """1,2,3
     Update sales worksheet, add new row with the list data provided
     """
     print("Updating sales worksheet...\n")
@@ -60,7 +71,6 @@ def update_sales_worksheet(data):
     print("Sales worksheet updated successfully.\n")
 
 
-data = get_sales_data()
-sales_data = [int(num) for num in data]
-update_sales_worksheet(sales_data)
-
+new_data = get_sales_data()
+new_sales_data = [int(num) for num in new_data]
+update_sales_worksheet(new_sales_data)
