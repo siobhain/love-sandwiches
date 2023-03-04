@@ -71,6 +71,15 @@ def update_sales_worksheet(data):
     print("Sales worksheet updated successfully.\n")
 
 
+def update_surplus_stock(sales_data):
+    print("Surplus function")
+    surplus = SHEET.worksheet("stock").get_all_values()
+    #print(surplus)
+    last = surplus.pop()
+    print(last)
+
+
 new_data = get_sales_data()
 new_sales_data = [int(num) for num in new_data]
 update_sales_worksheet(new_sales_data)
+update_surplus_stock(new_sales_data)
